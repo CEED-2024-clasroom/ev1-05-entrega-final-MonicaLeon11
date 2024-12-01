@@ -1,0 +1,197 @@
+:root {
+  --wheel-color: #ffffffAA;
+  --wheel-letter-selection: #f1c40f;
+
+  --tool-color: white;
+  --tool-background: #00000033;
+  --tool-hover-background: #cccccc;
+}
+
+.on-top {
+  z-index: 300 !important;
+}
+
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  background-color: #f0f0f0;
+}
+
+#game {
+  background-color: white;
+  position: relative;
+  background-image: url(../../resources/background_3.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 600px;
+  height: 70vh;
+  min-height: 700px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+
+  display: grid;
+  grid-template-rows: 60fr 40fr;
+}
+
+/* All items in game are not selectable */
+#game * {
+  user-select: none;
+}
+
+#controls {
+  display: grid;
+  position: relative;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+#black {
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7  ;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- */
+/*                             Grid                                 */
+/* ---------------------------------------------------------------- */
+
+#word-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 4px;
+  background-color: transparent;
+}
+
+#grid > div {
+  background-color: white;
+  border-radius: 5px;
+  width:40px;
+  height: 40px;
+}
+
+.letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------- */
+/*                            Wheel                                 */
+/* ---------------------------------------------------------------- */
+
+#wheel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+#wheel {
+  background-color: var(--wheel-color);
+
+  position: relative;
+  border-radius: 50%;
+  width: 80%;
+  padding-bottom: 80%;
+}
+
+.wheel-letter {
+  position: absolute;
+  width: 25%;
+  height: 25%;
+  text-align: center;
+  line-height: 2em;
+  font-size: 2em;
+  text-transform: uppercase;
+  font-weight: 800;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+
+  /* It needs to be on top of the lines */
+  z-index: 100;
+
+  /* Transition for shuffling letters */
+  transition: left 0.5s ease, top 0.5s ease;
+}
+
+.wheel-letter.on-top {
+  background-color: white;
+}
+
+.wheel-letter.selected {
+  background-color: var(--wheel-letter-selection); /* Yellow */
+
+}
+
+.line {
+  background-color: var(--wheel-letter-selection);
+  height: 10px;
+  position: absolute;
+  transform-origin: top left;
+}
+
+/* ---------------------------------------------------------------- */
+/*                            Tools                                 */
+/* ---------------------------------------------------------------- */
+
+.tools {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tools.left {
+  align-items: flex-end;
+}
+
+.tool {
+  border: 3px solid var(--tool-color);
+  background-color: var(--tool-background);
+  border-radius: 50%;
+  width: 60px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+}
+
+.tool:hover {
+  background-color: var(--tool-hover-background);
+}
+
+.tool-icon {
+  font-size: 1.5em;
+  color: var(--tool-color);
+}
